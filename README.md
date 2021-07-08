@@ -1,4 +1,4 @@
-# Introduciton
+# Introduction
 
 ## Vision
 
