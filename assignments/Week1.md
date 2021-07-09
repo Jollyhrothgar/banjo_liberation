@@ -16,6 +16,7 @@ For your own reading / understading, read up a little bit about the following, a
 ## Homework
 
 *   Check out the latest version of 'Banjo_Liberation_Mystic_Rolls.ipynb' from this repository.
+   *   You may need to do a sequence of `git commit` `git push` and `git pull` to get everything synced. Don't worry, you can't break it.
 *   Run each cell of the notebook to confirm  your environment is set up correctly.
 *   Modify one of the roll generator functions to generate bob-dobalina style roles
     *   Challanges: How are you going to represent "don't play" in the fingering lists?
