@@ -37,8 +37,8 @@ print("Rendering audio...")
 
 data = timeline.render()
 
-# Reduce volume to 25%
-data = data * 0.25
+# Reduce volume to 50%
+data = data * 0.5
 
 print("Playing audio...")
 
