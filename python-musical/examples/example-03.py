@@ -1,7 +1,9 @@
 import numpy
 
-from musical.theory import Note, Scale
-from musical.audio import source, playback
+from musical.theory import Note
+from musical.theory import Scale
+from musical.audio import source
+from musical.audio import play
 
 # Define key and scale
 key = Note('C4')
@@ -25,6 +27,6 @@ data = data * 0.5
 
 print("Playing audio...")
 
-playback.play(data)
+play(data)
 
 print("Done!")

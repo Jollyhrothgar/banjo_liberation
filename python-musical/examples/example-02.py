@@ -1,9 +1,12 @@
 import random
 
-from musical.theory import Note, Scale
-from musical.audio import effect, playback
+from musical.theory import Scale
+from musical.theory import Note
+from musical.audio import effect
+from musical.audio import play
 
-from timeline import Hit, Timeline
+from timeline import Hit
+from timeline import Timeline
 
 
 # Define key and scale
@@ -47,6 +50,6 @@ data = data * 0.5
 
 print("Playing audio...")
 
-playback.play(data)
+play(data)
 
 print("Done!")
