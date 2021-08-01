@@ -1,7 +1,9 @@
-from musical.theory import Note, Scale, Chord
-from musical.audio import playback
-
-from timeline import Hit, Timeline
+from musical.theory import Note
+from musical.theory import Scale
+from musical.theory import Chord
+from musical.audio.playback import play
+from timeline import Hit
+from timeline import Timeline
 
 # Define key and scale
 key = Note('D3')
@@ -42,6 +44,6 @@ data = data * 0.5
 
 print("Playing audio...")
 
-playback.play(data)
+play(data)
 
 print("Done!")

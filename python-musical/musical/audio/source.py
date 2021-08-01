@@ -1,5 +1,6 @@
 import math
 import numpy
+import pygame
 
 def silence(length, rate=44100):
     ''' Generate 'length' seconds of silence at 'rate'
@@ -11,7 +12,6 @@ def pygamesound(sound):
     ''' Create numpy array from pygame sound object
         rate is determined by pygame.mixer settings
     '''
-    import pygame
     pygame.sndarray.use_arraytype('numpy')
     array = pygame.sndarray.array(sound)
     rate, format, channels = pygame.mixer.get_init()

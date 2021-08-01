@@ -1,6 +1,8 @@
 import random
 
 from musical.theory import Note, Scale
+from musical.theory import Note
+from musical.the
 from musical.audio import effect, playback
 
 from timeline import Hit, Timeline
