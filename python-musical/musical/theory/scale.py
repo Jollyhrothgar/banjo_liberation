@@ -48,7 +48,7 @@ class Scale:
         self.intervals = tuple(scale)
 
     def __str__(self):
-        return 'Scale(%s, %s)' % (self.root, self.intervals)
+        return f'Scale({self.root}, {self.intervals})'
 
     def __len__(self):
         return len(self.intervals)
