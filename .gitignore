@@ -1,4 +1,5 @@
 # Custom for here
+.vscode/
 scratch
 jupyterlab_appdir
 env.sh
