@@ -7,7 +7,7 @@ from timeline import Timeline
 
 # Define key and scale
 key = Note('G3')
-scale = Scale(key, 'major')
+scale = Scale(key, 'minor')
 
 # Grab progression chords from scale starting at the octave of our key
 progression = Chord.progression(scale, base_octave=key.octave)
