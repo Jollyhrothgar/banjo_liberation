@@ -1,12 +1,8 @@
-from musical.theory import Note
-from musical.theory import Scale
-from musical.theory import Chord
-from musical.audio.playback import play
-from timeline import Hit
-from timeline import Timeline
-
 import copy
 
+from musical.theory import Note
+from musical.audio.playback import play
+from timeline import Hit
 
 ROLL_DICT = {
     'square_roll': (3, 2, 5, 1)
@@ -25,6 +21,24 @@ CHORD_DICT = {
     'beta_c1': (2, 1, 0, 2, 0),
     'beta_d1': (4, 3, 2, 4, 0)
 }
+
+def render_roll(roll, note_length):
+    """
+    Given a roll (an array of Notes) and a note_length (in seconds), render the wave-form that the
+    audio synthesizer needs to make some noise.
+
+    Args:
+        roll: an array of Notes
+        note_length: how long to play each note.
+    Returns:
+        rendered notes (a wave-form that is played with an audio synthesizer)
+    """
+    return [Hit(note=note, length=note_length).render() for note in roll]
+
+def play_roll(roll):
+    """Play each note in a rendered roll sequentially"""
+    for note in roll:
+        play(note)
 
 
 def fret_strings(chord):
@@ -62,15 +76,11 @@ def make_roll(strings, roll_pattern):
     Args:
         strings: A banjo strings dictionary.
         roll_pattern: A tuple which determins what order to pluck the strings.
-    
+
     Returns:
         An array of Notes.
     """
-
-    notes = [strings[pluck] for pluck in roll_pattern]
-
-    
-
+    return [strings[pluck] for pluck in roll_pattern]
 
 
 if __name__ == '__main__':
