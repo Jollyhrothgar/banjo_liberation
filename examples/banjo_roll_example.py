@@ -2,12 +2,12 @@ import copy
 
 from musical.theory import Note
 from musical.audio.playback import play
-from timeline import Hit
+from musical.audio import Hit
 
 ROLL_DICT = {
-    'square_roll': (3, 2, 5, 1)
-    'triple_forward_square': (4, 3, 2, 3, 2, 1, 4, 3, 2, 3, 2, 1, 5, 2, 3, 1)
-    'forward_backward': (3, 2, 1, 2 , 1, 2, 3, 1)
+    'square_roll': (3, 2, 5, 1),
+    'triple_forward_square': (4, 3, 2, 3, 2, 1, 4, 3, 2, 3, 2, 1, 5, 2, 3, 1),
+    'forward_backward': (3, 2, 1, 2 , 1, 2, 3, 1),
 }
 
 BANJO_TUNING = {
@@ -21,13 +21,13 @@ BANJO_TUNING = {
 CHORD_DICT = {
     'gamma_g1': (0, 0, 0, 0, 0),
     'beta_c1': (2, 1, 0, 2, 0),
-    'beta_d1': (4, 3, 2, 4, 0)
-    'alpha_g1': (5, 3, 4, 5, 0)
-    'alpha_c1': (10, 8, 9, 10, 0)
-    'alpha_d1': (12, 10, 11 ,12, 0)
-    'beta_c2': (14, 13, 12, 14, 0)
-    'beta_g2': (9, 8, 7, 9, 0)
-    'beta_d2': (16, 15, 14, 16, 0)
+    'beta_d1': (4, 3, 2, 4, 0),
+    'alpha_g1': (5, 3, 4, 5, 0),
+    'alpha_c1': (10, 8, 9, 10, 0),
+    'alpha_d1': (12, 10, 11 ,12, 0),
+    'beta_c2': (14, 13, 12, 14, 0),
+    'beta_g2': (9, 8, 7, 9, 0),
+    'beta_d2': (16, 15, 14, 16, 0),
 }
 
 def render_roll(roll, note_length):
@@ -92,4 +92,23 @@ def make_roll(strings, roll_pattern):
 
 
 if __name__ == '__main__':
-    pass
+    chord_1 = fret_strings(chord=CHORD_DICT['alpha_g1'])
+    chord_2 = fret_strings(chord=CHORD_DICT['alpha_c1'])
+    chord_3 = fret_strings(chord=CHORD_DICT['alpha_d1'])
+    chord_4 = fret_strings(chord=CHORD_DICT['alpha_g1'])
+
+
+    roll = (
+               make_roll(strings=chord_1, roll_pattern=ROLL_DICT['forward_backward'])
+                   + make_roll(strings=chord_2, roll_pattern=ROLL_DICT['forward_backward'])
+                   + make_roll(strings=chord_3, roll_pattern=ROLL_DICT['forward_backward'])
+                   + make_roll(strings=chord_4, roll_pattern=ROLL_DICT['forward_backward'])
+           )
+
+    print(roll)
+
+    rendered = render_roll(roll=roll, note_length=0.10)
+    
+    print(rendered)
+
+    play_roll(rendered)

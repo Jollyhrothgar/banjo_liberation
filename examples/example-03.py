@@ -4,6 +4,8 @@ from musical.theory import Note
 from musical.theory import Scale
 from musical.audio import source
 from musical.audio import play
+from musical.audio import Hit
+from musical.audio import Timeline
 
 # Define key and scale
 key = Note('C4')

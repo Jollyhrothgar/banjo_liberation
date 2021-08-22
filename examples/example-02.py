@@ -5,8 +5,8 @@ from musical.theory import Note
 from musical.audio import effect
 from musical.audio import play
 
-from timeline import Hit
-from timeline import Timeline
+from musical.audio import Hit
+from musical.audio import Timeline
 
 
 # Define key and scale

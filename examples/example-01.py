@@ -2,8 +2,8 @@ from musical.theory import Note
 from musical.theory import Scale
 from musical.theory import Chord
 from musical.audio.playback import play
-from timeline import Hit
-from timeline import Timeline
+from musical.audio import Hit
+from musical.audio import Timeline
 
 # Define key and scale
 key = Note('G3')
