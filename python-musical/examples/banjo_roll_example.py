@@ -5,40 +5,73 @@ from musical.audio.playback import play
 from timeline import Hit
 from timeline import Timeline
 
+import copy
 
-def play_notes_from_list(notes, note_length):
-    """Take a list of Note classes, play notes all at the same length.
-    
-    Args:
-        notes: [Note, ...]
-        note_length: float (length of note in seconds)
-    """
-    for note in notes:
-        rendered = Hit(note, length=note_length).render()
-        play(rendered)
 
 ROLL_DICT = {
-    'square_roll': (0, 4, 12, 7) 
+    'square_roll': (3, 2, 5, 1)
 }
 
-def make_roll_from_absolute_intervals(note, roll_pattern):
+BANJO_TUNING = {
+    1: Note('d5'),
+    2: Note('b5'),
+    3: Note('g4'),
+    4: Note('d4'),
+    5: Note('g5')
+}
+
+CHORD_DICT = {
+    'gamma_g1': (0, 0, 0, 0, 0),
+    'beta_c1': (2, 1, 0, 2, 0),
+    'beta_d1': (4, 3, 2, 4, 0)
+}
+
+
+def fret_strings(chord):
     """
-    Given a reference Note, note, return a list of Notes that would be
-    played in a square roll pattern "down the neck".
+    Fret strings pulls BANJO_TUNING from the global namespace and frets the strings
+    according to the supplied chord.
+
+    chord: a tuple which maps the depressed fret to the banjo string, according to the schema:
+        chord = (
+            first string fret,
+            second string fret,
+            third string fret,
+            fourth string fret,
+            fifth string fret
+        )
+    Args:
+        chord: a tuple of depressed frets
+    Returns:
+        A dictionary of banjo strings mapped to the note after the chord has been applied.
+    """
+    global BANJO_TUNING
+    fretted_strings = dict(BANJO_TUNING)
+
+    for str_idx, fret in enumerate(chord):
+        banjo_string = str_idx + 1
+        fretted_strings[banjo_string] = fretted_strings[banjo_string].transpose(fret)
+    return fretted_strings
+
+
+def make_roll(strings, roll_pattern):
+    """
+    Given a set of strings and a roll pattern, return the strings to be plucked in order of
+    plucking.
 
     Args:
-        note: An instance of the class Note
-        roll_pattern: A list of absolute half-step intervals relative
-            to the `note` argument that will form the roll.
+        strings: A banjo strings dictionary.
+        roll_pattern: A tuple which determins what order to pluck the strings.
+    
     Returns:
-        A list of Notes in a roll pattern.
+        An array of Notes.
     """
-    return [note.transpose(interval) for interval in roll_pattern]
+
+    notes = [strings[pluck] for pluck in roll_pattern]
+
     
 
+
+
 if __name__ == '__main__':
-    note_list = make_roll_from_absolute_intervals(
-                    note=Note('g4'),
-                    roll_pattern=ROLL_DICT['square_roll'])
-    print(note_list)
-    play_notes_from_list(note_list, note_length=0.5)
+    pass
