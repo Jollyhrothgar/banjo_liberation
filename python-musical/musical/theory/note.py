@@ -26,9 +26,12 @@ class Note:
             self.index = note.index
         else:
             self.index = int(note)
+    
+    def get_note_name(self):
+        return f"{self.note}{self.octave}"
 
     def __repr__(self):
-        return "Note('%s%i')" % (self.note, self.octave)
+        return f"Note('{self.note}{self.octave}')"
 
     def __lt__(self, other):
         return self.index < other.index
@@ -93,3 +96,8 @@ class Note:
         ''' Return frequency of note
         '''
         return 16.35159783128741 * 2.0 ** (float(self.index) / 12.0)
+
+# Tests
+if __name__ == '__main__':
+    test_note = Note('g4')
+    print(test_note.get_note_name())
