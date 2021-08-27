@@ -110,7 +110,7 @@ def make_gamma_seven(chord):
 def make_gamma_minor_seven(chord):
     pass
 
-def generate_moveable_chords(file_name):
+def generate_moveable_chords(file_name=None):
     """
     Given the first location of moveable chords represented as a tuple:
         chord = (
@@ -124,9 +124,15 @@ def generate_moveable_chords(file_name):
     Generate all moveable chords on the banjo. Optionally, each chord can be transformed with a
     chord transformer (but the base shapes could also just be specified hardcoded).
 
+    #TODO(mike): Do something with file_name
+
     Args:
         file_name: A string that contains the full path to the file to serialize the generated
         chords.
+
+    Returns:
+        A dictionary mapping the normalized Note name (representing the pitch of the chord) to the
+        frets that are depressed to play the chord.
 
     """
     first_alpha = (2, 0, 1, 2, 0) # e
