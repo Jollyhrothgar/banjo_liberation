@@ -23,9 +23,6 @@ MOVEABLE_CHORDS = {
         
 }
 
-
-
-
 CHORD_DICT = {
     'gamma_g1': (0, 0, 0, 0, 0),
     'beta_c1': (2, 1, 0, 2, 0),
@@ -85,18 +82,93 @@ def fret_strings(chord):
         fretted_strings[banjo_string] = fretted_strings[banjo_string].transpose(fret)
     return fretted_strings
 
-def generate_chords(file_name):
-    global MOVEABLE_CHORDS
-    for chord_name, strings in MOVEABLE_CHORDS.items():
-        inversion, note_name = chord_name.split("_")
+
+def make_alpha_minor(chord):
+    pass
+
+def make_alpha_seven(chord):
+    pass
+
+def make_alpha_minor_seven(chord):
+    pass
+
+def make_beta_minor(chord):
+    pass
+
+def make_beta_seven(chord):
+    pass
+
+def make_beta_minor_seven(chord):
+    pass
+
+def make_gamma_minor(chord):
+    pass
+
+def make_gamma_seven(chord):
+    pass
+
+def make_gamma_minor_seven(chord):
+    pass
+
+def generate_moveable_chords(file_name):
+    """
+    Given the first location of moveable chords represented as a tuple:
+        chord = (
+            first string fret,
+            second string fret,
+            third string fret,
+            fourth string fret,
+            fifth string fret
+        )
+    
+    Generate all moveable chords on the banjo. Optionally, each chord can be transformed with a
+    chord transformer (but the base shapes could also just be specified hardcoded).
+
+    Args:
+        file_name: A string that contains the full path to the file to serialize the generated
+        chords.
+
+    """
+    first_alpha = (2, 0, 1, 2, 0) # e
+    first_beta  = (2, 1, 0, 2, 0) # c
+    first_gamma = (0, 0, 0, 0, 0) # g
+    moveable_chords = {}
+
+    for fret_position in range(0, 23):
+        # These are all tuples that map strings to fret positions:
+        # E.g. alpha = (
+        #                  first string fret position,
+        #                  second string fret position,
+        #                  third string fret position,
+        #                  fourth string fret position,
+        #                  fifth string fret position,
+        #              )
+        # Add the fret offset to each base chord, and don't add an offset to the fifth string.
+        alpha = tuple([banjo_string + fret_position if string_idx != 4 else banjo_string for string_idx, banjo_string in enumerate(first_alpha)])
+        beta = tuple([banjo_string + fret_position if string_idx != 4 else banjo_string for string_idx, banjo_string in enumerate(first_beta)])
+        gamma = tuple([banjo_string + fret_position if string_idx != 4 else banjo_string for string_idx, banjo_string in enumerate(first_gamma)])
+
+        fretted_alpha = fret_strings(alpha)
+        fretted_beta = fret_strings(beta)
+        fretted_gamma = fret_strings(gamma)
         
-        if inversion == 'gamma':
-            for fret in range(0, 23):
-                #chord = (strings[0]+fret, strings[1]+fret, strings[2]+fret, strings[3]+fret, strings[4]+fret)
-                chord = tuple([string+fret for string in strings])
-                fretted_strings = fret_strings(chord) 
-                print('gamma'+repr(fretted_strings[3]))
-       
+        # Make sure we're not playing frets that don't exist
+        if any([fret > 22 for fret in alpha]) and any([fret < 0 for fret in alpha]):
+            pass # Chord contains frets that are greater than 22 or less than 0.
+        else:
+            moveable_chords['alpha_' + fretted_alpha[1].get_note_name()] = alpha
+
+        if any([fret > 22 for fret in beta]) and any([fret < 0 for fret in beta]):
+            pass # Chord contains frets that are greater than 22 or less than 0.
+        else:
+            moveable_chords['beta_' + fretted_beta[2].get_note_name()] = beta 
+
+        if any([fret > 22 for fret in gamma]) and any([fret < 0 for fret in gamma]):
+            pass # Chord contains frets that are greater than 22 or less than 0.
+        else:
+            moveable_chords['gamma_' + fretted_gamma[3].get_note_name()] = gamma
+    
+    return moveable_chords
 
 
 def make_roll(strings, roll_pattern):
@@ -120,6 +192,7 @@ if __name__ == '__main__':
     chord_3 = fret_strings(chord=CHORD_DICT['alpha_d1'])
     chord_4 = fret_strings(chord=CHORD_DICT['alpha_g1'])
 
-    generate_chords(file_name=None)
+    for name, chord in generate_moveable_chords(file_name=None).items():
+        print(name, chord)
 
-    print(Note('g4'))
+
