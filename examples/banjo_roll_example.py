@@ -18,6 +18,14 @@ BANJO_TUNING = {
     5: Note('g5')
 }
 
+MOVEABLE_CHORDS = {
+    'gamma_g4': (0, 0, 0, 0, 0),
+        
+}
+
+
+
+
 CHORD_DICT = {
     'gamma_g1': (0, 0, 0, 0, 0),
     'beta_c1': (2, 1, 0, 2, 0),
@@ -77,6 +85,19 @@ def fret_strings(chord):
         fretted_strings[banjo_string] = fretted_strings[banjo_string].transpose(fret)
     return fretted_strings
 
+def generate_chords(file_name):
+    global MOVEABLE_CHORDS
+    for chord_name, strings in MOVEABLE_CHORDS.items():
+        inversion, note_name = chord_name.split("_")
+        
+        if inversion == 'gamma':
+            for fret in range(0, 23):
+                #chord = (strings[0]+fret, strings[1]+fret, strings[2]+fret, strings[3]+fret, strings[4]+fret)
+                chord = tuple([string+fret for string in strings])
+                fretted_strings = fret_strings(chord) 
+                print('gamma'+repr(fretted_strings[3]))
+       
+
 
 def make_roll(strings, roll_pattern):
     """
@@ -98,3 +119,7 @@ if __name__ == '__main__':
     chord_2 = fret_strings(chord=CHORD_DICT['alpha_c1'])
     chord_3 = fret_strings(chord=CHORD_DICT['alpha_d1'])
     chord_4 = fret_strings(chord=CHORD_DICT['alpha_g1'])
+
+    generate_chords(file_name=None)
+
+    print(Note('g4'))
