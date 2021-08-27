@@ -12,7 +12,7 @@ ROLL_DICT = {
 
 BANJO_TUNING = {
     1: Note('d5'),
-    2: Note('b5'),
+    2: Note('b4'),
     3: Note('g4'),
     4: Note('d4'),
     5: Note('g5')
@@ -30,6 +30,7 @@ CHORD_DICT = {
     'beta_d2': (16, 15, 14, 16, 0),
 }
 
+
 def render_roll(roll, note_length):
     """
     Given a roll (an array of Notes) and a note_length (in seconds), render the wave-form that the
@@ -42,6 +43,7 @@ def render_roll(roll, note_length):
         rendered notes (a wave-form that is played with an audio synthesizer)
     """
     return [Hit(note=note, length=note_length).render() for note in roll]
+
 
 def play_roll(roll):
     """Play each note in a rendered roll sequentially"""
@@ -96,19 +98,3 @@ if __name__ == '__main__':
     chord_2 = fret_strings(chord=CHORD_DICT['alpha_c1'])
     chord_3 = fret_strings(chord=CHORD_DICT['alpha_d1'])
     chord_4 = fret_strings(chord=CHORD_DICT['alpha_g1'])
-
-
-    roll = (
-               make_roll(strings=chord_1, roll_pattern=ROLL_DICT['forward_backward'])
-                   + make_roll(strings=chord_2, roll_pattern=ROLL_DICT['forward_backward'])
-                   + make_roll(strings=chord_3, roll_pattern=ROLL_DICT['forward_backward'])
-                   + make_roll(strings=chord_4, roll_pattern=ROLL_DICT['forward_backward'])
-           )
-
-    print(roll)
-
-    rendered = render_roll(roll=roll, note_length=0.10)
-    
-    print(rendered)
-
-    play_roll(rendered)
