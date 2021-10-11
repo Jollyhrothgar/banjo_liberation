@@ -5,7 +5,7 @@ html {
 }
 
 body {
-    max-width: 960px;
+    max-width: 1900px;
     margin: 0 auto;
     background: white;
 }
@@ -74,6 +74,8 @@ nav ul li a, nav ul li span, header .action {
     background: #cae6f6;
     border: 1px solid #377ba8;
 }
+
+
 
 .post > header {
     display: flex;

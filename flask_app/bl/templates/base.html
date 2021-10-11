@@ -3,15 +3,17 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='./img/favicon.png') }}">
 <nav>
-  <h1>Banjo Liberation Dev Blog</h1>
+  <h1>Banjo Liberation</h1>
   <ul>
     {% if g.user %}
-      <li><span>Hi, {{ g.user['username'].capitalize()}}! What's on your mind?</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+    <li><span>Hi, {{ g.user['username'].capitalize()}}! What's on your mind?</span></li>
+    <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
     {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+    <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+    <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
     {% endif %}
+    <li><a href="{{url_for('blog.index')}}">Dev Blog</a></li>
+    <li><a href="{{ url_for('rolls.rolls') }}">Roll Generator</a></li>
   </ul>
 </nav>
 <section class="content">
